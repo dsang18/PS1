@@ -16,7 +16,7 @@ def customer_login(request):
             print(user_details)
             if check_password(password, hash_pwd):
                 
-                return HttpResponse(f"/{str(user_details[0].id)}/home/")
+                return HttpResponse(f"/customer/{str(user_details[0].id)}/home/")
             else:
                 return HttpResponse("Password Mismatch")
 
@@ -35,12 +35,13 @@ def farmer_login(request):
     if request.method=="POST":
         phone_no = request.POST.get("phone")
         password = request.POST.get("password")
+
         try:
             user_details = Farmer.objects.filter(phone=phone_no)
             hash_pwd = user_details[0].password
             
             if check_password(password, hash_pwd):
-                return HttpResponse(f"/{str(user_details[0].id)}/home/")
+                return HttpResponse(f"/farmer/{str(user_details[0].id)}/home/")
             else:
 
                 return HttpResponse("Password Mismatch")
@@ -87,13 +88,17 @@ def customer_register(request):
         new_user.save()
     return render(request, 'customer_register.html',{"all_numbers":all_numbers})
 
-def home(request, id):
-    return render(request, 'home.html')
+def home(request, user_type, id):
+    update = 0
+    if user_type=='farmer':
+        update=1
+
+    return render(request, 'home.html', {'update':update})
 
 def profile(request):
     return render(request, 'profile.html')
 
-def add_product(request):
+def add_product(request, user_type, id):
     return render(request, 'add_product.html')
 
 def update_product(request):

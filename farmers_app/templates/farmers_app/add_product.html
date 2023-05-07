@@ -1,0 +1,30 @@
+{% include 'base.html' %}
+{% block body %}
+
+<div class="fluid-container">
+    <div class="row">
+      <div class="col-md-4 my-4 mx-5">
+        <!-- <img
+          src="/media/{{product.images}}"
+          alt="{{product.product_name}}"
+          style="width: 80%; border-radius: 10px"/>
+      </div> -->
+      <form method="POST">
+        {% csrf_token %}
+            <input type="text" placeholder="Vegetable or food grain name" name="prod_name">
+            <input type="text" placeholder="Quantity in Kg", name="quantity">
+            <input type="file" placeholder="image", name="prod_image">
+            
+        </form>
+    </div>
+  </div>
+  
+
+{% endblock %}
+
+
+
+{% block script %}
+
+
+{% endblock %}

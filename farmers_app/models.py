@@ -38,7 +38,7 @@ class FoodGrains(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     quantity = models.IntegerField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='images/')
     
     def __str__(self):
         return self.name

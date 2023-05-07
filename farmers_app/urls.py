@@ -16,17 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import views;
+from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('',views.choice),
     path('customer-login/', views.customer_login),
     path('farmer-login/', views.farmer_login),
     path('farmer-register/', views.farmer_register),
     path('customer-register/', views.customer_register),
-    path('<int:id>/home/', views.home),
-    path('<int:id>/profile/',views.profile),
-    path('<int:id>/add-new-product/',views.add_product),
-    path('<int:id>/update-product/',views.update_product),
-
-
-]
+    path('<str:user_type>/<int:id>/home/', views.home),
+    path('<str:user_type>/<int:id>/home/profile/',views.profile),
+    path('<str:user_type>/<int:id>/home/add-new-product/',views.add_product),
+    path('<str:user_type>/<int:id>/home/update-product/',views.update_product),
+] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
