@@ -2,27 +2,36 @@
 
 {% block body %}
 
-<div class="fluid-container">
-    <div class="row">
-      <div class="col-md-4 my-4 mx-5">
-        <img
-          src="media/{{product.images}}"
-          alt="{{product.product_name}}"
-          style="width: 80%; border-radius: 10px"/>
-      </div>
-      <div class="col-md-4 my-4 mx-5">
-        <h2 class="h2">{{product.product_name}}</h2>
-        <input type="text" class="h5" style="width:80%;">{{product.desc}}</input>
-        <input type="text" class="h4 my-3">M.R.P: <del>&#8377;{{product.price|add:discount}}.00</del></input>
-        <input type="text" class="h4 my-3">Deal Price: <span style="color:#f04e4e;">&#8377;{{product.price}}.00</span></input>
-        <input type="text" class="h4 my-3">You Save: <span style="color:#0971e4;">&#8377;{{discount}}0</span></input>
-  
-        <button class="btn btn-primary">Buy Now</button>
-        <a href="#" class="btn btn-light mx-2 cart" id="prod{{i.id}}"
-          >Add to Cart</a>
-      </div>
-    </div>
-  </div>
-  
-
+<section class="text-gray-600 body-font overflow-hidden">
+  <div class="container px-5 py-10 mx-auto">
+    <div class="lg:w-5/5 mx-auto flex flex-wrap">
+      <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="/media/images/{{produce.image}}">
+      <form class="my-10" method="POST">
+        {% csrf_token %}
+        <div class="flex flex-col p-10 w-5/6 mx-auto items-center border border-green-600 rounded-lg">
+            
+            <div class="flex flex-col w-7/8 mt-4">
+                <label for="name">Name</label>
+                <input  class="border border-green-600 rounded-lg px-4 py-2" type="text" name="name" id="name" value="{{produce.name}}">
+            </div>
+            <div class="flex flex-col w-7/8 mt-4">
+                <label for="price">Price per Kg</label>
+                <input  class="border border-green-600 rounded-lg px-4 py-2" type="number" name="price" id="price" value="{{produce.price}}">
+            </div>
+            <div class="flex flex-col w-7/8 mt-4">
+                <label for="quantity">Quantity in Kg</label>
+                <input  class="border border-green-600 rounded-lg px-4 py-2" type="number" name="quantity" id="quantity" value="{{produce.quantity}}">
+            </div>
+            <div class="flex flex-col w-7/8 mt-4 mx-3">
+                <label for="image">Image</label>
+                <input  class="border border-green-600 rounded-lg px-4 py-2" type="file" name="image" id="image" value="/media/images/{{produce.image}}">
+            </div>
+            <div class="flex gap-3 mt-4">
+              <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-white border hover:border-green-600 hover:text-black transition ease-in-out hover:shadow" name="update">Update</button>
+              <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-white border hover:border-green-600 hover:text-black transition ease-in-out hover:shadow" name="delete">Delete</button>
+              <a class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-white border hover:border-green-600 hover:text-black transition ease-in-out hover:shadow" href="/{{user_type}}/{{id}}/home/">Cancel</a>
+            </div>
+        </div>
+      </form>  
+    
 {% endblock %}
