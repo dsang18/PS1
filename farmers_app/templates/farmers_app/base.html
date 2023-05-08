@@ -12,8 +12,15 @@
       rel="stylesheet"
       type="text/css"
     />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro-v6@44659d9/css/all.min.css" rel="stylesheet" type="text/css" />
-<body class="bg-[#e9e7e7]">
+
+    <body class="bg-[#e9e7e7]">
+    <script>
+        AOS.init();
+    </script>
+
     {% block body %}
     {% endblock %}
 </body>

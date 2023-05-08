@@ -2,14 +2,26 @@
 
 {% block body %}
 
-<div class="flex flex-col p-10 w-3/4 mx-auto items-center border border-green-600 mt-44 rounded-lg">
-    <p class="text-2xl">Fresh &nbsp;<i class="fa-light fa-leaf text-green-500"></i></p>
-    <p class="text-center mt-4 italic">
-        From fresh fruits and vegetables to artisanal cheeses and baked goods, there's something for everyone at Harvest Hub. Our market is also a place for community, where neighbors come together to connect, share stories, and support one another.
-    </p>
-    <div class="flex gap-3 mt-4">
-        <a href="farmer-login/" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-white border hover:border-green-600 hover:text-black transition ease-in-out hover:shadow" href="">Farmer</a>
-        <a href="customer-login/"class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-white border hover:border-green-600 hover:text-black transition ease-in-out hover:shadow" href="">Customer</a>
+<div class="bg pt-56">
+    <div class="flex bg-white shadow-xl flex-col p-10 w-11/12 md:w-1/2 mx-auto items-center border border-green-600 rounded-lg ">
+        <p class="text-2xl">Fresh &nbsp;<i class="fa-light fa-leaf text-green-500"></i></p>
+        <p class="text-center mt-4 italic">
+            From fresh fruits and vegetables to artisanal cheeses and baked goods, there's something for everyone at Harvest Hub. Our market is also a place for community, where neighbors come together to connect, share stories, and support one another.
+        </p>
+        <div class="flex gap-3 mt-4">
+            <a href="farmer-login/" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-white border hover:border-green-600 hover:text-black transition ease-in-out hover:shadow" href="">Farmer</a>
+            <a href="customer-login/"class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-white border hover:border-green-600 hover:text-black transition ease-in-out hover:shadow" href="">Customer</a>
+        </div>
     </div>
 </div>
+<style>
+    .bg{
+        height: 100vh;
+        width: 100vw;
+        background: radial-gradient(circle, transparent 25%, #ffffff  26%),linear-gradient(45deg, transparent 46%, #16c550 47%, #16c550 52%, transparent 53%), linear-gradient(135deg, transparent 46%, #16c550 47%, #16c550 52%, transparent 53%);
+        background-size: 2em 2em;
+        background-color: #ffffff;
+        opacity: 1
+    }
+</style>
 {% endblock %}
