@@ -16,20 +16,33 @@
     <div class="md:grid md:grid-cols-2 md:gap-8 md:mx-5 lg:flex lg:max-w-3xl xl:max-w-lg">
         {% if all_produces %}
         {% for produce in all_produces %}
-        <div class="border-solid border-2 border-[#d1cfcf] rounded-xl my-3 max-w-sm">
-            <img src="/media/images/{{produce.image}}" alt="image">
-            <div class="p-5">
-                <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
-                <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{produce.name}}</h1>
-                <div class="flex items-center flex-wrap ">
-                    <a class="ml-auto text-green-600 inline-flex items-center md:mb-2 lg:mb-0" href="update-product/{{produce.id}}">View Details
-                        <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"></path>
-                            <path d="M12 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
+        <div class="border-solid border-2 border-[#d1cfcf] rounded-xl my-3 max-w-sm flex flex-col justify-between">
+            <div>
+                <div>
+                    <img src="{{produce.image}}" alt="image" style="width:30rem !important;">
                 </div>
+                <div class="p-5 flex justify-between flex-col">
+                    <div>
+                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">PRODUCE</h2>
+                        <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{produce.name}}</h1>
+                    </div>
+    
+                    <div class="flex flex-col">
+                        {% if update == 0 %}
+                        <h1 class="title-font text-lg font-medium text-green-600 mb-3">Price {{produce.price}}</h1>
+                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">Quantity Available {{produce.quantity}} </h2>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="text" value="{{produce.id}}" name="produce_item" hidden>
+                            <button name="add_to_cart" class="add-to-cart-btns ml-auto text-white py-1 px-3 bg-green-600 inline-flex items-center rounded-md md:mb-2 lg:mb-0">Add to cart</button>
+                        </form>
+                        {% else %}
+                        <a class="ml-auto text-green-600 inline-flex items-center md:mb-2 lg:mb-0"
+                            href="update-product/{{produce.id}}">See Details</a>
+                        {% endif %}
+                    </div>
+                </div>
+                
             </div>
         </div>
         {% endfor %}
@@ -39,4 +52,18 @@
     </div>
 </main>
 
+{% endblock %}
+
+
+{% block script %}
+<script>
+    var add_to_cart_btn = document.querySelectorAll(".add-to-cart-btns")
+    
+    add_to_cart_btn.forEach(item=> item.addEventListener("click",event=>{
+        if (item.innerHTML!='Added'){
+            item.innerHTML = 'Added'
+            item.classList.add('bg-green-800')
+        }   
+    }));
+</script>
 {% endblock %}

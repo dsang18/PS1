@@ -4,9 +4,11 @@
 
 <section class="text-gray-600 body-font overflow-hidden">
   <div class="container px-5 py-10 mx-auto">
-    <div class="lg:w-5/5 mx-auto flex flex-wrap">
-      <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="/media/images/{{produce.image}}">
-      <form class="my-10" method="POST">
+    <div class="lg:w-5/5 mx-auto flex flex-wrap item-center justify-center">
+      <div class="flex items-center justify-center">
+        <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="{{produce.image}}" style="width:25rem !important; height:20rem !important;">
+      </div>
+      <form class="my-10" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="flex flex-col p-10 w-5/6 mx-auto items-center border border-green-600 rounded-lg">
             

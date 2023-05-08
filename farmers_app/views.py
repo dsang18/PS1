@@ -4,7 +4,7 @@ from .models import *
 from django.contrib.auth.hashers import check_password
 import json
 from django.conf import settings
-
+from django.core.files.storage import FileSystemStorage
 
 
 def choice(request):
@@ -100,6 +100,10 @@ def home(request, user_type, id):
         update=1
         user_details = Farmer.objects.filter(id=id)
         all_produce = FoodGrains.objects.filter(farmer=user_details[0])
+    if "add_to_cart" in request.POST:
+        produce_item = request.POST.get("produce_item")
+        get_produce = FoodGrains.objects.filter(id=produce_item)
+        print(get_produce[0])
     return render(request, 'home.html', {'update':update, "user":user_details[0], "all_produces":all_produce})
 
 def profile(request):
@@ -111,10 +115,19 @@ def add_product(request, user_type, id):
         name = request.POST.get("name")
         price = request.POST.get("price")
         quantity = request.POST.get("quantity")
-        image = request.POST.get("image")
-
-        new_produce = FoodGrains(farmer=farmer[0], name=name, price=price, quantity=quantity, image=image)
-        new_produce.save()
+        # image = request.POST.get("image")
+        request_file = request.FILES['image'] if 'image' in request.FILES else None
+        if request_file:
+            # save attached file
+            print("X")
+            # create a new instance of FileSystemStorage
+            fs = FileSystemStorage()
+            file = fs.save(request_file.name, request_file)
+            # the fileurl variable now contains the url to the file. This can be used to serve the file when needed.
+            fileurl = fs.url(file)
+        
+            new_produce = FoodGrains(farmer=farmer[0], name=name, price=price, quantity=quantity, image=fileurl)
+            new_produce.save()
         return redirect(f"/{user_type}/{id}/home/")
 
     return render(request, 'add_product.html', {'user_type':user_type, 'id':id})
@@ -126,16 +139,27 @@ def update_product(request, user_type, id, prod_id):
             name = request.POST.get("name")
             price = request.POST.get("price")
             quantity = request.POST.get("quantity")
-            image = request.POST.get("image")
+            # image = request.POST.get("image")
             produce = FoodGrains.objects.get(id=prod_id)
+            request_file = request.FILES['image'] if 'image' in request.FILES else None
+            if request_file:
+            # save attached file
+            # create a new instance of FileSystemStorage
+                fs = FileSystemStorage()
+                file = fs.save(request_file.name, request_file)
+                # the fileurl variable now contains the url to the file. This can be used to serve the file when needed.
+                fileurl = fs.url(file)
+                produce.image = fileurl
+
             produce.name = name
             produce.price = price
             produce.quantity = quantity
-            if image:
-                produce.image = image
             produce.save()
         elif "delete" in request.POST:
             FoodGrains.objects.filter(id=prod_id).delete()
         return redirect(f'/{user_type}/{id}/home/')
     return render(request, 'update_product.html',{'user_type':user_type, 'id':id, 'produce':produce[0]})
 
+def cart(request, user_type, id):
+
+    return render(request, 'cart.html')

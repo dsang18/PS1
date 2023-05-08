@@ -1,0 +1,57 @@
+{% include 'navbar.html' %}
+{% block title %}<title>Cart</title>{% endblock %}
+{% block body %}
+
+<section class="p-2">
+    <table class="mx-auto mt-10 text-center">
+        <thead>
+            <tr>
+                <th class="border border-l-0 border-t-0 border-[#5c7f67] px-4 py-2">Product Name</th>
+                <th class="border border-l-0 border-t-0 border-[#5c7f67] px-4 py-2">Price</th>
+                <th class="border border-l-0 border-t-0 border-[#5c7f67] px-4 py-2">Quantity</th>
+                <th class="border border-l-0 border-t-0 border-r-0 border-[#5c7f67] px-4 py-2">Remove</th>
+            </tr>
+        </thead>
+            <tbody>
+            <tr>
+                <td class="border border-l-0 border-[#5c7f67] px-4 py-2">Prod 1</td>
+                <td class="border border-l-0 border-[#5c7f67] px-4 py-2">$1200</td>
+                <td class="border border-l-0 border-[#5c7f67] px-4 py-2">
+                    <div class="flex items-center justify-center">
+                        <input type="text" class="inline w-8 bg-[#e9e7e7] inputControl" value="0" onchange="handleInputChange()">
+                    </div>
+                </td>
+                <td class="border border-l-0 border-r-0 border-[#5c7f67] px-4 py-2"><i class="fa-solid fa-trash-can"></i></td>
+            </tr>
+            <tr>
+                <td class="border border-l-0 border-b-0 border-[#5c7f67] px-4 py-2">Prod 2</td>
+                <td class="border border-l-0 border-b-0 border-[#5c7f67] px-4 py-2">$1002</td>
+                <td class="border border-l-0 border-b-0 border-[#5c7f67] px-4 py-2">
+                    <div class="flex items-center justify-center">
+                        <input type="text" class="inline w-8 bg-[#e9e7e7] inputControl" value="0" onchange="handleInputChange()">
+                    </div>
+                </td>
+                <td class="border border-l-0 border-b-0 border-r-0 border-[#5c7f67] px-4 py-2"><i class="fa-solid fa-trash-can"></i></td>
+            </tr>
+            <tr>
+                <td class="border border-l-0 border-b-0 border-[#5c7f67] px-4 py-2">Total</td>
+                <td class="border border-l-0 border-b-0 border-[#5c7f67] px-4 py-2">$2202</td>
+                <td class="border border-l-0 border-b-0 border-[#5c7f67] px-4 py-2"></td>
+                <td class="border border-l-0 border-b-0 border-r-0 border-[#5c7f67] px-4 py-2"><i class="fa-solid fa-trash-can"></i></td>
+            </tr>
+        </tbody>
+    </table>  
+
+    <div class="flex mt-10 justify-center">
+        <button class="inline-flex items-center border-2 border-[#5c7f67] py-1 px-3 focus:outline-none hover:bg-gray-200 rounded-lg text-base mt-4 md:mt-0">Checkout&nbsp;<i class="fa-regular fa-cart-shopping-fast"></i></button>
+        <button class="inline-flex items-center border-2 border-[#5c7f67] py-1 px-3 focus:outline-none hover:bg-gray-200 rounded-lg text-base mt-4 ml-5 md:mt-0">Cancel&nbsp;<i class="fa-regular fa-cart-shopping-fast"></i></button>
+    </div>
+
+    <!-- <div class="flex items-center justify-center">
+        <button class="px-4 py-2 border border-gray-400 rounded-l" onclick="decreaseCounter()">-</button>
+        <input class="px-4 py-2 text-center border border-gray-400" type="number" id="counter" value="0">
+        <button class="px-4 py-2 border border-gray-400 rounded-r" onclick="increaseCounter()">+</button>
+    </div> -->
+      
+</section>
+{% endblock %}
