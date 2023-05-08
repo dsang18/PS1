@@ -16,10 +16,11 @@
     <div class="md:grid md:grid-cols-2 md:gap-8 md:mx-5 lg:flex lg:max-w-3xl xl:max-w-lg">
         {% if all_produces %}
         {% for produce in all_produces %}
+        {% if produce.quantity > 0 %}
         <div class="border-solid border-2 border-[#d1cfcf] rounded-xl my-3 max-w-sm flex flex-col justify-between">
             <div>
                 <div>
-                    <img src="{{produce.image}}" alt="image" style="width:30rem !important;">
+                    <img src="{{produce.image}}" alt="image">
                 </div>
                 <div class="p-5 flex justify-between flex-col">
                     <div>
@@ -45,6 +46,7 @@
                 
             </div>
         </div>
+        {% endif %}
         {% endfor %}
         {% else %}
         <h3 class="text-2xl mt-5"> No Produce to Show !!!</h3>

@@ -32,6 +32,6 @@ urlpatterns = [
     path('<str:user_type>/<int:id>/home/add-new-product/',views.add_product),
     path('<str:user_type>/<int:id>/home/update-product/<int:prod_id>/',views.update_product),
     path('<str:user_type>/<int:id>/home/cart/',views.view_cart),
-
+        path('<str:user_type>/<int:id>/home/order-confirmed/',views.confirm_order),
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 

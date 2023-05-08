@@ -17,7 +17,7 @@ def customer_login(request):
         try:
             user_details = Customer.objects.filter(phone=phone_no)
             hash_pwd = user_details[0].password
-            print(user_details)
+            # print(user_details)
             if check_password(password, hash_pwd):
                 return HttpResponse(f"/customer/{str(user_details[0].id)}/home/")
             else:
@@ -172,7 +172,7 @@ def update_product(request, user_type, id, prod_id):
 def view_cart(request, user_type, id):
     user_details = Customer.objects.filter(id=id)
     all_items_in_cart = cart.objects.filter(customer=user_details[0]).values('FoodGrains')
-    all_items_qty_in_cart = cart.objects.filter(customer=user_details[0]).values('quantity')
+    all_items_qty_in_cart = cart.objects.filter(customer=user_details[0], status="unordered").values('quantity')
     all_ids = []
     for i in all_items_in_cart:
         all_ids.append(i['FoodGrains'])
@@ -184,3 +184,27 @@ def view_cart(request, user_type, id):
         cart.objects.filter(customer=user_details[0], FoodGrains=produce_query).delete()
         return redirect(f'/{user_type}/{id}/home/cart/')
     return render(request, 'cart.html',{"items_in_cart":all_prods, "qtys":all_items_qty_in_cart,"user_type":user_type, "id":id})
+
+def confirm_order(request, user_type, id):
+    user_details = Customer.objects.filter(id=id)
+    all_items_in_cart = cart.objects.filter(customer=user_details[0]).values('FoodGrains')
+    all_items_qty_in_cart = cart.objects.filter(customer=user_details[0], status="unordered").values('quantity')
+    all_ids = []
+    for i in all_items_in_cart:
+        all_ids.append(i['FoodGrains'])
+    all_prods = FoodGrains.objects.filter(id__in=all_ids)
+    all_prices = []
+    for i in all_prods:
+        all_prices.append(i.price)
+    total_price = sum(all_prices)+100
+    
+    if request.method=="POST":
+        for i in all_ids:
+            temp = FoodGrains.objects.get(id=i)
+            temp.quantity = temp.quantity-1
+            temp.save()
+            
+            return redirect(f'/{user_type}/{id}/home/')
+        
+
+    return render(request, 'order_confirm.html', {"items_in_cart":all_prods, "qtys":all_items_qty_in_cart,"user_type":user_type, "id":id, "total_price":total_price})
