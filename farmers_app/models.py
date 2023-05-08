@@ -46,6 +46,6 @@ class FoodGrains(models.Model):
     
 
 class cart(models.Model):
-    customer = models.ForeignKey(Farmer, db_column='customer', on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, db_column='customer', on_delete=models.CASCADE)
     FoodGrains = models.ForeignKey(FoodGrains, db_column='in_cart_item', on_delete=models.CASCADE)
     quantity = models.IntegerField()
